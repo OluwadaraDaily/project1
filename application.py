@@ -1,5 +1,5 @@
 import os, psycopg2, requests, json 
-from flask import Flask, session, render_template, url_for, request, redirect, jsonify
+from flask import Flask, session, render_template, url_for, request, redirect, jsonify, flash
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -35,18 +35,20 @@ def register():
 	password = request.form.get("password")
 	
 	# Check if user exists
-	check_user = ("SELECT * FROM users WHERE username=:username}", {"username":username})
-	
-	if check_user:
-		return render_template("error.html", message = "Already a user")
-	
-	# If user does not exist, insert into DB and let in
-	db.execute("INSERT INTO users (username,password) VALUES (:username, :password)"
-				, {"username":username, "password":password})
-	db.commit()
-	
-	if db.commit is True:
-		return redirect(url_for("home"))
+	if db.execute("SELECT * FROM users WHERE username=:username OR password=:password"
+		,{"username":username, "password":password}).rowcount == 0:
+
+		# If user does not exist, insert into DB and let in
+		db.execute("INSERT INTO users (username, password) VALUES (:username, :password)"
+					,{"username":username, "password":password})
+		db.commit()
+		
+		flash("You are registered. You can login now!")
+		return redirect(url_for("login"))
+
+	flash("Try again with another username or password")
+	return redirect(url_for('register'))
+
 
 @app.route("/login", methods=["GET","POST"])
 def login():

@@ -73,8 +73,17 @@
 
 <!-- The rest of the body -->
 {% block body %}
-	<!-- <img src="{{ url_for('static', filename='img/register-1.jpg') }}"> -->
 	<div class="form-div">
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		    <ul>
+		    {% for message in messages %}
+		      <li>{{ message }}</li>
+		    {% endfor %}
+		    </ul>
+		  {% endif %}
+		{% endwith %}
+		<h1> REGISTRATION </h1>
 		<form action="{{ url_for('register') }}" method="POST">
 		
 			<p>
