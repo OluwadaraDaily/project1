@@ -77,9 +77,6 @@ def home():
 	if session.get("user_id"):
 		if request.method == "GET":
 			return render_template("home.html")
-		
-		if session.get("logged_in") == False:
-			return redirect("login.tml")
 
 		if session.get("books") is None:
 			session["books"] = []
@@ -91,18 +88,20 @@ def home():
 		matchString = (f"%{search}%")
 
 		# Query statement
-		sql = db.execute("SELECT * FROM books WHERE title ILIKE :x OR author ILIKE :y OR isbn ILIKE :z"
-				,{"x":matchString , "y":matchString, "z":matchString}).fetchall()
-
-		if len(sql) == 0:
-			return render_template("error.html", message="No matches found")
+		sql = db.execute("SELECT * FROM books WHERE title LIKE :x OR author LIKE :y OR isbn LIKE :z"
+				,{"x":matchString, "y":matchString, "z":matchString}).fetchall()
 
 		# Every row to be appended to the books array for each session
 		for row in sql:
-			session["books"].append(row)
-		
+			session["books"].append(row)		
+
+		if len(session["books"]) == 0:
+			return render_template("error.html", message="No matches found")
+
 		return render_template("results.html", books=session["books"], search=search)
+	
 	return redirect(url_for("login"))
+
 @app.route("/book/<int:book_id>")
 def book(book_id):
 	if session.get("user_id"):

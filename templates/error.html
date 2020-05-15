@@ -3,6 +3,14 @@
 <!-- Title of page -->
 {% block title %} Error | The Reviewer {% endblock %}
 
+{% block head %}
+	<style type="text/css">
+		h1 {
+			color: black;
+		}
+	</style>
+{% endblock %}
+
 <!-- For the nav links -->
 {% block nav %}  
 	<li class="nav-item">
@@ -16,10 +24,12 @@
 <!-- The rest of the body -->
 {% block body %}
 	<div class="jumbotron">
-		<h1>Success</h1>
+		<h1>Error</h1>
 	</div>
 	
-	{{ message }} <br>
+	<h1> {{ message }}. 
+		Got {{ sql }}
+	</h1>
 
 	<p> 
 		<a href="{{ url_for('home') }}"> Return Home </a> 
