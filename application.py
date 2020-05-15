@@ -114,7 +114,7 @@ def book(book_id):
 
 		parsed = json.loads(data)
 
-
+		user = None
 		for review in reviews:
 			user = db.execute("SELECT * FROM users WHERE id=:id", {"id":review.user_id}).fetchone()
 		

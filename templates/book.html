@@ -87,9 +87,6 @@
 
 <!-- The rest of the body -->
 {% block body %}
-	<div class="jumbotron">
-		<h1 id="title"> {{ book.title }} </h1>
-	</div>
 	<div class="contain">
 		<h1> BOOK DETAILS </h1>
 		<div class="book-details">
@@ -102,7 +99,7 @@
 			<h1> Ratings Count: {{ parsed['books'][0]['work_ratings_count'] }} </h1>
 		</div>
 		<div class="reviews">
-			<h3> REVIEWS </h2>
+			<h2> REVIEWS </h2>
 			{% if reviews|length > 0 %}
 				{% for review in reviews %}
 				<div class="card" style="width: 18rem;">
@@ -114,7 +111,7 @@
 				</div>
 				{% endfor %} <hr>
 			{% else %}
-				<p> No reviews yet </p> <hr> <br> <br>
+				<h3> No reviews yet </h3> <br>
 			{% endif %}
 		</div>		
 		<div>
