@@ -95,8 +95,8 @@ def home():
 		for row in sql:
 			session["books"].append(row)		
 
-		if len(session["books"]) == 0:
-			return render_template("error.html", message="No matches found")
+		# if len(session["books"]) == 0:
+		# 	return render_template("error.html", message="No matches found")
 
 		return render_template("results.html", books=session["books"], search=search)
 	
