@@ -93,12 +93,13 @@ def home():
 
 		# Every row to be appended to the books array for each session
 		for row in sql:
-			session["books"].append(row)		
+			session["books"].append(row)
+
+		if len(session["books"]) == 0:
+			return render_template("error.html", message="No matches found")
 
 		return render_template("results.html", books=session["books"], search=search)
-	
 	return redirect(url_for("login"))
-
 @app.route("/book/<int:book_id>")
 def book(book_id):
 	if session.get("user_id"):
