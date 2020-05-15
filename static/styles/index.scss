@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Jost&display=swap');
+
+$font:'Jost';
+	
+body{
+	color: #fff;
+	font-family: $font;
+	background-image: url("static/img/logo.png") no-repeat;
+	// color: #fff;
+}
+#logo {
+	border-radius: 30px;
+}
+
+.nav-link{
+	margin: 0 5px;
+	background-color: white;
+	border: 2px white solid;
+	border-radius: 10px;
+	box-shadow: 2px 2px;
+}
+
+

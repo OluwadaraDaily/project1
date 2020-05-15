@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+<!-- Title of page -->
+{% block title %} Success | The Reviewer {% endblock %}
+
+<!-- For the nav links -->
+{% block nav %}  
+	<li class="nav-item">
+		<a class="nav-link" href="{{ url_for('home') }}"> Home </a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{ url_for('logout') }}"> Logout </a>
+	</li>
+{% endblock %}
+
+<!-- The rest of the body -->
+{% block body %}
+<div class="jumbotron">
+		<h1>Error</h1>
+	</div>
+	{{ message }} <br>
+
+	<p> 
+		<a href="{{ url_for('home') }}"> Return Home </a> 
+	</p>
+{% endblock %}

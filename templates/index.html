@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+<!-- Title of page -->
+{% block title %} Review Books Here | The Reviewer {% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+	<style type="text/css">
+		body{
+			background-color: #fff;
+			background: url({{url_for('static', filename='img/index-1.jpg')}});
+			background-size: cover;
+		}
+
+		.get-started {
+			margin-top: 170px;
+			margin-left: 420px;
+			padding: 15px;
+			letter-spacing: 5px;
+		}
+
+		@media only screen and (max-width: 600px){
+			h1 {
+				font-size: 28px;
+			}
+
+			.get-started {
+				margin-top: 70px;
+				margin-left: 50px;
+			}
+		}
+	</style>
+{% endblock %}
+
+<!-- The rest of the body -->
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<h1 class="text-justify">
+				You can never get a cup of tea large enough or a book long enough to suit me
+			</h1>
+			<p class="text-right">― C.S. Lewis</p>
+		</div>
+
+		<!-- <h1> To Read, Or Not To Read…Not Even a Question </h1> -->
+		<a href="{{ url_for('login') }}">
+			<button class="get-started"> GET STARTED </button>
+		</a>
+	</div>
+{% endblock %}

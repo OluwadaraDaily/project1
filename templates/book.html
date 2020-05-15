@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+<!-- Title of page -->
+{% block title %} {{ book.title }}  | The Reviewer {% endblock %}
+
+{% block head %}
+	<style type="text/css">
+		body{
+			background-color: #fff;
+			background: url({{url_for('static', filename='img/register-4.jpg')}});
+			background-size: cover;
+		}
+		a {
+			color: black
+		}
+
+		label {
+			font-size: 30px;
+		}
+
+		label:hover {
+			background-color: white;
+			color: black;
+		}
+
+		.card-body {
+			background-color: black;
+		}
+		.book-details {
+			width: 600px;
+			border: 2px solid white;
+			border-radius: 25px;
+			padding: 10px;
+			box-shadow: 3px 3px #ccc;
+		}
+
+		.reviews {
+			margin-top: 25px;
+		}
+
+		.contain {
+			margin-left: 300px;
+		}
+
+		#title {
+			color: black;
+		}
+
+		@media only screen and (max-width: 600px){
+			h1 {
+				font-size: 22px;
+			}
+			
+			label {
+			font-size: 12px;
+			
+			}
+			
+			.reviews {
+			margin-top: 15px;
+			}
+
+			.contain {
+			margin-left: 20px;
+			}
+
+			.book-details {
+			width: 250px;
+			border: 2px solid white;
+			border-radius: 25px;
+			padding: 10px;
+			box-shadow: 3px 3px #ccc;
+			}
+		}
+
+	</style>
+{% endblock %}
+
+{% block nav %}  
+	<li class="nav-item">
+		<a class="nav-link" href="{{ url_for('home') }}"> Home </a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{ url_for('logout') }}"> Logout </a>
+	</li>
+{% endblock %}
+
+<!-- The rest of the body -->
+{% block body %}
+	<div class="jumbotron">
+		<h1 id="title"> {{ book.title }} </h1>
+	</div>
+	<div class="contain">
+		<h1> BOOK DETAILS </h1>
+		<div class="book-details">
+			<h1> Book Title: "{{ book.title }}" </h1> <br>
+			<h1> Author: "{{ book.author }}" </h1>
+			<h1> ISBN: {{ book.isbn }} </h1> <br>
+			<h1> Year: {{ book.year }} </h1> <br>
+			
+			<h1> Average Rating: {{ parsed['books'][0]['average_rating'] }} </h1> <br>
+			<h1> Ratings Count: {{ parsed['books'][0]['work_ratings_count'] }} </h1>
+		</div>
+		<div class="reviews">
+			<h3> REVIEWS </h2>
+			{% if reviews|length > 0 %}
+				{% for review in reviews %}
+				<div class="card" style="width: 18rem;">
+				  <div class="card-body">
+				    <h5 class="card-title">By {{user.username}}</h5>
+				    <h6 class="card-subtitle mb-2 text-muted"> Rating: {{ review.rating }}/5 </h6>
+				    <p class="card-text"> {{ review.content }} </p>
+				  </div>
+				</div>
+				{% endfor %} <hr>
+			{% else %}
+				<p> No reviews yet </p> <hr> <br> <br>
+			{% endif %}
+		</div>		
+		<div>
+			<form action="{{ url_for('reviews', book_id=book.id)}}" method="POST">
+				<label> Write Your Own Review </label>
+				<textarea class="form-control col-lg-4" rows="8" name="review"></textarea> <br>
+				
+				<label> Rate the book (/5) </label>
+				<select name="rating" class="form-control col-lg-1">
+					<option value="1"> 1 </option>
+					<option value="2"> 2 </option>
+					<option value="3"> 3 </option>
+					<option value="4"> 4 </option>
+					<option value="5"> 5 </option>
+				</select> <br>
+				
+				<button class="btn btn-info"> Submit </button>
+			</form>
+		</div>
+	</div>
+	
+{% endblock %}

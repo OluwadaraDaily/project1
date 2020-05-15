@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+<!-- Title of page -->
+{% block title %} Review Books Here | The Reviewer {% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+	<style type="text/css">
+		body{
+			background-color: #fff;
+			background: url({{url_for('static', filename='img/index-2.jpg')}});
+			background-size: cover;
+		}
+		.form-div {
+			margin-left: 450px;
+			/*text-align: center;*/
+			border: 2px solid white;
+			border-radius: 25px;
+			width: 400px;
+			padding: 50px;
+			/*background-color: transparent;*/
+		}
+		input[type="text"], input[type='password'] {
+			border-radius: 5px;
+			padding: 10px;
+			width: 100%;
+			/*border: none;*/
+			/*background-color: transparent !important;*/
+		}
+
+		input[type="text"]:focus, input[type='password']:focus {
+			border: none;
+		}
+
+		label {
+			font-size: 20px;
+		}
+
+		#p-login {
+			text-align: center;
+		}
+
+		#login-btn, #register-btn {
+			width: 100%;
+			padding: 5px 0;
+			letter-spacing: 7px;
+			font-weight: bolder;
+		}
+
+		#no-account {
+			text-align: center;
+			/*color: green;*/
+		}
+
+		@media only screen and (max-width: 600px){
+			.form-div {
+			margin-left: 30px;
+			/*text-align: center;*/
+			border: 2px solid white;
+			border-radius: 25px;
+			width: 250px;
+			padding: 20px;
+			/*background-color: transparent;*/
+			}
+			
+		}
+	</style>
+{% endblock %}
+
+<!-- Heading of the page (h1 tag) -->
+{% block header %} Landing Page  {% endblock %}
+
+<!-- The rest of the body -->
+{% block body %}
+	<div class="form-div">
+		<form action="{{ url_for('login') }}" method="POST">
+			<div>
+				<p class="p-username">
+					<label>Username</label> <br>
+					<input type="text" name="username" required>
+				</p>
+				<p class="p-password">
+					<label>Password</label> <br>
+					<input type="password" name="password" required>
+				</p>
+				<p id="p-login">
+					<button id="login-btn"> LOGIN </button>
+				</p>
+				
+			</form>
+		</div> <br>
+		<div id="no-account">
+			<p>Do not have an account?</p>
+			<a href="{{ url_for('register') }}">
+				<button id="register-btn"> REGISTER </button>
+			</a>
+		</div>
+	</div>
+{% endblock %}

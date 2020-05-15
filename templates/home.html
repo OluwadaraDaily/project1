@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+<!-- Title of page -->
+{% block title %} Home | The Reviewer {% endblock %}
+
+{% block head %}
+	
+	<style type="text/css">
+		body{
+			background-color: #fff;
+			background: url({{url_for('static', filename='img/black-bgd.jpg')}});
+			background-size: cover;
+		}
+
+		form {
+			margin-top: 190px;
+			margin-left: 200px;
+			/*padding: 250px;*/
+		}
+
+		input {
+			padding: 10px;
+			width: 900px;
+			border-radius: 10px;
+		}
+
+		footer {
+			margin-top: 220px;
+		}
+
+		@media only screen and (max-width: 600px){
+			h1 {
+				font-size: 14px;
+			}
+			form {
+			margin-top: 90px;
+			margin-left: 20px;
+			}
+
+		input {
+			padding: 10px;
+			width: 180px;
+			border-radius: 10px;
+			}
+
+		footer {
+			margin-top: 120px;
+			}
+		}
+	</style>
+{% endblock %}
+
+<!-- For the nav links -->
+{% block nav %}  
+	<li class="nav-item">
+		<a class="nav-link" href="{{ url_for('home') }}"> Home </a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{ url_for('logout') }}"> Logout </a>
+	</li>
+{% endblock %}
+
+<!-- Heading of the page (h1 tag) -->
+{% block header %} Homepage  {% endblock %}
+
+<!-- The rest of the body -->
+{% block body %}
+	<form action="{{ url_for('home') }}" method="POST">
+		<h1>Search For Book by Name, Author or ISBN</h1>
+		<input type="search" name="" me="search" required>
+		<button class="btn btn-primary"> GO </button>
+	</form>
+
+	<footer>
+		Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> <br> www.flaticon.com</a>	
+	</footer>
+	
+{% endblock %}
